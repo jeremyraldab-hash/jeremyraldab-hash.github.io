@@ -1,0 +1,419 @@
+// App.jsx
+
+export default function App() {
+  const products = [
+    {
+      name: "HELLBOUND HOODIE",
+      price: "$120",
+      image:
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "BLOODLINE TEE",
+      price: "$65",
+      image:
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "CHAOS PANTS",
+      price: "$95",
+      image:
+        "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop",
+    },
+  ];
+
+  const gallery = [
+    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+  ];
+
+  return (
+    <div className="app">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Oswald:wght@300;400;700&display=swap');
+
+        *{
+          margin:0;
+          padding:0;
+          box-sizing:border-box;
+          scroll-behavior:smooth;
+        }
+
+        body{
+          background:black;
+          color:white;
+          font-family:'Oswald',sans-serif;
+          overflow-x:hidden;
+        }
+
+        .app{
+          background:black;
+          min-height:100vh;
+        }
+
+        .navbar{
+          position:fixed;
+          top:0;
+          width:100%;
+          background:rgba(0,0,0,0.8);
+          backdrop-filter:blur(10px);
+          border-bottom:1px solid #330000;
+          z-index:1000;
+        }
+
+        .nav-content{
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          padding:20px 50px;
+        }
+
+        .logo{
+          font-family:'Rubik Glitch',cursive;
+          color:#ff0000;
+          font-size:3rem;
+          text-shadow:0 0 20px red;
+        }
+
+        .nav-links{
+          display:flex;
+          gap:30px;
+        }
+
+        .nav-links a{
+          color:white;
+          text-decoration:none;
+          text-transform:uppercase;
+          letter-spacing:3px;
+          transition:0.3s;
+        }
+
+        .nav-links a:hover{
+          color:red;
+        }
+
+        .hero{
+          height:100vh;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          text-align:center;
+          padding:20px;
+          background:
+          linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,1)),
+          url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1800&auto=format&fit=crop');
+          background-size:cover;
+          background-position:center;
+        }
+
+        .hero h1{
+          font-family:'Rubik Glitch',cursive;
+          font-size:8rem;
+          color:red;
+          text-shadow:0 0 30px red;
+          animation:float 4s infinite ease-in-out;
+        }
+
+        .hero p{
+          margin-top:20px;
+          letter-spacing:8px;
+          text-transform:uppercase;
+          color:#ccc;
+        }
+
+        .hero-buttons{
+          margin-top:40px;
+          display:flex;
+          gap:20px;
+        }
+
+        .btn{
+          padding:15px 35px;
+          border:none;
+          cursor:pointer;
+          border-radius:15px;
+          text-transform:uppercase;
+          font-weight:bold;
+          transition:0.3s;
+        }
+
+        .red-btn{
+          background:linear-gradient(to right,#5c0000,#ff0000);
+          color:white;
+        }
+
+        .red-btn:hover{
+          transform:scale(1.05);
+          box-shadow:0 0 20px red;
+        }
+
+        .outline-btn{
+          background:transparent;
+          border:1px solid red;
+          color:white;
+        }
+
+        .outline-btn:hover{
+          background:#220000;
+        }
+
+        .section{
+          padding:120px 50px;
+        }
+
+        .section-title{
+          text-align:center;
+          margin-bottom:60px;
+        }
+
+        .section-title h2{
+          font-family:'Rubik Glitch',cursive;
+          font-size:4rem;
+          color:red;
+          text-shadow:0 0 20px red;
+        }
+
+        .section-title p{
+          margin-top:10px;
+          letter-spacing:5px;
+          text-transform:uppercase;
+          color:#777;
+        }
+
+        .products{
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+          gap:30px;
+        }
+
+        .card{
+          background:#111;
+          border:1px solid #330000;
+          border-radius:25px;
+          overflow:hidden;
+          transition:0.4s;
+        }
+
+        .card:hover{
+          transform:translateY(-10px);
+          box-shadow:0 0 25px rgba(255,0,0,0.3);
+        }
+
+        .card img{
+          width:100%;
+          height:400px;
+          object-fit:cover;
+        }
+
+        .card-content{
+          padding:25px;
+        }
+
+        .card-content h3{
+          letter-spacing:3px;
+        }
+
+        .price{
+          color:red;
+          margin-top:10px;
+          font-size:1.3rem;
+        }
+
+        .gallery{
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+          gap:20px;
+        }
+
+        .gallery img{
+          width:100%;
+          height:400px;
+          object-fit:cover;
+          border-radius:20px;
+          transition:0.4s;
+          border:1px solid #330000;
+        }
+
+        .gallery img:hover{
+          transform:scale(1.03);
+        }
+
+        .login-box{
+          max-width:500px;
+          margin:auto;
+          background:#111;
+          padding:40px;
+          border-radius:25px;
+          border:1px solid #330000;
+        }
+
+        .login-box input{
+          width:100%;
+          padding:15px;
+          margin-top:20px;
+          background:black;
+          border:1px solid #550000;
+          color:white;
+          border-radius:10px;
+        }
+
+        .login-box button{
+          width:100%;
+          margin-top:20px;
+        }
+
+        .music{
+          max-width:800px;
+          margin:auto;
+          text-align:center;
+        }
+
+        footer{
+          padding:40px;
+          text-align:center;
+          color:#777;
+          border-top:1px solid #220000;
+          letter-spacing:4px;
+        }
+
+        @keyframes float{
+          0%{transform:translateY(0px);}
+          50%{transform:translateY(-15px);}
+          100%{transform:translateY(0px);}
+        }
+
+        @media(max-width:768px){
+
+          .hero h1{
+            font-size:4rem;
+          }
+
+          .nav-content{
+            flex-direction:column;
+            gap:20px;
+          }
+
+          .nav-links{
+            flex-wrap:wrap;
+            justify-content:center;
+          }
+
+          .hero-buttons{
+            flex-direction:column;
+          }
+
+          .section{
+            padding:100px 20px;
+          }
+        }
+      `}</style>
+
+      <nav className="navbar">
+        <div className="nav-content">
+          <h1 className="logo">NO SAINTS</h1>
+
+          <div className="nav-links">
+            <a href="#shop">Shop</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#login">Login</a>
+            <a href="#music">Music</a>
+          </div>
+        </div>
+      </nav>
+
+      <section className="hero">
+        <h1>NO SAINTS</h1>
+
+        <p>Underground Streetwear</p>
+
+        <div className="hero-buttons">
+          <button className="btn red-btn">Shop Now</button>
+
+          <button className="btn outline-btn">Explore</button>
+        </div>
+      </section>
+
+      <section className="section" id="shop">
+        <div className="section-title">
+          <h2>DROP 001</h2>
+          <p>Limited Stock</p>
+        </div>
+
+        <div className="products">
+          {products.map((item, index) => (
+            <div className="card" key={index}>
+              <img src={item.image} alt={item.name} />
+
+              <div className="card-content">
+                <h3>{item.name}</h3>
+
+                <p className="price">{item.price}</p>
+
+                <button className="btn red-btn">
+                  Add To Cart
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section" id="gallery">
+        <div className="section-title">
+          <h2>Gallery</h2>
+          <p>Chaos Energy</p>
+        </div>
+
+        <div className="gallery">
+          {gallery.map((img, index) => (
+            <img src={img} key={index} alt="gallery" />
+          ))}
+        </div>
+      </section>
+
+      <section className="section" id="login">
+        <div className="section-title">
+          <h2>Login</h2>
+          <p>Members Only</p>
+        </div>
+
+        <div className="login-box">
+          <input type="email" placeholder="Email" />
+
+          <input type="password" placeholder="Password" />
+
+          <button className="btn red-btn">
+            Sign In
+          </button>
+        </div>
+      </section>
+
+      <section className="section" id="music">
+        <div className="section-title">
+          <h2>Soundtrack</h2>
+          <p>Ken Carson</p>
+        </div>
+
+        <div className="music">
+          <iframe
+            style={{ borderRadius: "20px" }}
+            src="https://open.spotify.com/embed/track/0K9tfz8O7qM5u5NfN0j0mE?utm_source=generator"
+            width="100%"
+            height="152"
+            frameBorder="0"
+            allowFullScreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </section>
+
+      <footer>
+        NO SAINTS © 2026
+      </footer>
+    </div>
+  );
+}
